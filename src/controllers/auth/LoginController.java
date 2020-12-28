@@ -37,8 +37,6 @@ public class LoginController extends HttpServlet {
 		}else {
 			request.getRequestDispatcher("/views/auth/login.jsp?msg=err").forward(request, response);
 		}
-		
-		
 	}
 
 }

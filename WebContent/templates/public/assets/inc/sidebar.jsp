@@ -22,7 +22,7 @@
 </div>
 
 			  <div class="well well-small alert alert-warning cntr">
-				  <h2>50% Discount</h2>
+				  <h2 style="font-family: 'Oswald', sans-serif;">50% Discount</h2>
 				  <p> 
 					 only valid for online order. <br><br><a class="defaultBtn" href="#">Click here </a>
 				  </p>

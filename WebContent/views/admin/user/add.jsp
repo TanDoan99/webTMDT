@@ -14,6 +14,7 @@
       		String err = (String) request.getParameter("err");
       	  	String username=request.getParameter("username");
       	  	String fullname=request.getParameter("fullname");
+      	  	String email=request.getParameter("email");
            	if("0".equals(err)) {
           %>
 			<div class="alert alert-danger" role="alert">
@@ -58,6 +59,15 @@
 		<%
 			}
 		%>
+		<% 
+			if("5".equals(err)) {
+         %>
+			<div class="alert alert-danger" role="alert">
+ 				Vui lòng nhập Email !
+			</div>
+		<%
+			}
+		%>
         <hr />
         <div class="row">
             <div class="col-md-12">
@@ -78,6 +88,10 @@
                                     <div class="form-group">
                                         <label for="fullname">Họ tên</label>
                                         <input type="text" id="fullname" value="<%if(fullname!=null)out.print(fullname); %>" name="fullname" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Email">Email</label>
+                                        <input type="text" id="email" value="<%if(email!=null)out.print(email); %>" name="email" class="form-control" />
                                     </div>
                                     
                                     

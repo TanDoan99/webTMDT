@@ -5,7 +5,7 @@
     <style>
 	/* thiết lập style cho thẻ a */
  .pagination a {
-   color: black;
+   color: #8A0829;
    float: left;
    padding: 8px 16px;
    text-decoration: none;
@@ -18,7 +18,7 @@
  }
 /* thêm màu nền khi người dùng hover vào class không active */
  .pagination a:hover:not(.active) {
-   background-color: #ddd;
+   background-color: #80FF00;
  }
 </style>
 <%@include file="/templates/public/assets/inc/header.jsp" %>
@@ -32,7 +32,7 @@ Body Section
     	if( request.getAttribute("cat")!=null){
            		Category cat=(Category)request.getAttribute("cat");
     %>
-		<h1><%=cat.getName()%></h1>
+		<h1 style="color: yellow;"><%=cat.getName()%></h1>
 		
 	<%
 				}
@@ -46,7 +46,7 @@ Body Section
             		listCatJewelryPage=(ArrayList<Jewelry>)request.getAttribute("listCatJewelryPage");
             		if(listCatJewelryPage!=null&listCatJewelryPage.size()>0){
             			for(Jewelry catJewelry:listCatJewelryPage){
-            				String urlSlug=request.getContextPath()+"/chi-tiet/"+StringUtil.makeSlug(catJewelry.getName())+"-"+catJewelry.getId() + "-" + catJewelry.getId_category().getId() + ".html";
+            				//String urlSlug=request.getContextPath()+"/chi-tiet/"+StringUtil.makeSlug(catJewelry.getName())+"-"+catJewelry.getId() + "-" + catJewelry.getId_category().getId() + ".html";
    %>
 	<div class="row-fluid">	  
 		<div class="span2">
@@ -71,8 +71,8 @@ Body Section
 			<input type="checkbox">  Adds product to compair
 		</label><br>
 		<div class="btn-group">
-		  <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
-		  <a href="product_details.html" class="shopBtn">VIEW</a>
+		  <span class=" icon-shopping-cart"></span><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=catJewelry.getId()%>)"> Add to cart</a>
+		  <a href="<%=request.getContextPath() %>/product_details?id=<%=catJewelry.getId() %>" class="shopBtn">VIEW</a>
 		 </div>
 			</form>
 		</div>
@@ -123,6 +123,29 @@ Body Section
      </div>
 </div>
 </div>
+<script>
+	function addToCart(id){
+		//alert("đã goi hàm");
+		$.ajax({
+			url: '<%=request.getContextPath()%>/index.html',
+			type: 'POST',
+			cache: false,
+			data: {
+				aid : id
+			},
+			success: function(data){
+				//$("#img"+x).attr("src",data);
+				//alert('Đã lưu vào giỏ hàng');
+				//alert(data);
+				$('#sizeCart').html(data);
+			},
+			error: function (){
+				alert('Có lỗi xảy ra');
+			}
+		});
+		return false;
+	}
+</script>
 <!--
 Footer
 -->

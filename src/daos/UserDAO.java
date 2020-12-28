@@ -19,7 +19,7 @@ public class UserDAO extends AbstractDAO {
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
 				User user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("fullname"));
+						rs.getString("fullname"), rs.getString("email"));
 				list.add(user);
 			}
 		} catch (SQLException e) {
@@ -35,12 +35,13 @@ public class UserDAO extends AbstractDAO {
 	public int add(User user) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "INSERT INTO users (username,password,fullname) VALUE (?,?,?)";
+		String sql = "INSERT INTO users (username,password,fullname,email) VALUE (?,?,?,?)";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, user.getUsername());
 			pst.setString(2, user.getPassword());
 			pst.setString(3, user.getFullname());
+			pst.setString(4, user.getEmail());
 			result = pst.executeUpdate();
 
 		} catch (SQLException e) {
@@ -74,7 +75,7 @@ public class UserDAO extends AbstractDAO {
 	public User getItem(int id) {
 		User item = null;
 		con = DBConnectionUtil.getConnection();
-		String sql = "SELECT id, username, password, fullname FROM users WHERE id = ?";
+		String sql = "SELECT id, username, password, fullname, email FROM users WHERE id = ?";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, id);
@@ -83,7 +84,8 @@ public class UserDAO extends AbstractDAO {
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String fullname = rs.getString("fullname");
-				item = new User(username, password, fullname);
+				String email = rs.getString("email");
+				item = new User(username, password, fullname,email);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -98,12 +100,13 @@ public class UserDAO extends AbstractDAO {
 	public int editItem(User users) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "UPDATE users SET password=?, fullname=? WHERE id = ?";
+		String sql = "UPDATE users SET password=?, fullname=?, email=? WHERE id = ?";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, users.getPassword());
 			pst.setString(2, users.getFullname());
-			pst.setInt(3, users.getId());
+			pst.setString(3, users.getEmail());
+			pst.setInt(4, users.getId());
 
 			result = pst.executeUpdate();
 
@@ -147,7 +150,7 @@ public class UserDAO extends AbstractDAO {
 			rs = pst.executeQuery();
 			if (rs.next()) {
 				user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("fullname"));
+						rs.getString("fullname"),rs.getString("email"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -168,7 +171,7 @@ public class UserDAO extends AbstractDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				User us = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("fullname"));
+						rs.getString("fullname"),rs.getString("email"));
 				listItems.add(us);
 			}
 			;

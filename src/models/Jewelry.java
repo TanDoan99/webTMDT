@@ -95,6 +95,18 @@ public class Jewelry {
 		this.new_product = new_product;
 		this.detail = detail;
 	}
+
+
+	public Jewelry(int id, String name, String picture, double price) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.picture = picture;
+		this.price = price;
+	}
+
+
+	
 	
 
 }

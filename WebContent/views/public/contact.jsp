@@ -6,7 +6,6 @@ Body Section
 	<hr class="soften">
 	<div class="well well-small">
 	 <%
-      						 	String msg = (String) request.getParameter("msg");
       						    String err = (String) request.getParameter("err");
       						       						 						
       						    String name=request.getParameter("name");

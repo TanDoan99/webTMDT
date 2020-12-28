@@ -15,10 +15,12 @@
       		String err = (String) request.getParameter("err");
       	  	String username=request.getParameter("username");
       	  	String fullname=request.getParameter("fullname");
+      	  	String emailname=request.getParameter("emailname");
       	  User user=(User)request.getAttribute("user");
   		if(user!=null){
   			username=user.getUsername();
   			fullname=user.getFullname();
+  			emailname=user.getEmail();
   		}
            	if("0".equals(err)) {
           %>
@@ -33,6 +35,15 @@
          %>
 			<div class="alert alert-danger" role="alert">
  				Vui lòng nhập họ tên !
+			</div>
+		<%
+			}
+		%>
+		<% 
+			if("3".equals(err)) {
+         %>
+			<div class="alert alert-danger" role="alert">
+ 				Vui lòng nhập email !
 			</div>
 		<%
 			}
@@ -57,6 +68,10 @@
                                     <div class="form-group">
                                         <label for="fullname">Họ tên</label>
                                         <input type="text" id="fullname" value="<%if(fullname!=null)out.print(fullname); %>" name="fullname" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="text" id="email" value="<%if(emailname!=null)out.print(emailname); %>" name="emailname" class="form-control" />
                                     </div>
                                     
                                     

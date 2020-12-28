@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Category;
+import models.Comment;
 import models.Jewelry;
 import utils.DBConnectionUtil;
 import utils.DefineUtil;
 import utils.DefineUtilPublic;
+import utils.DefineUtilPublicPro;
 
 public class JewelryDAO extends AbstractDAO {
 
@@ -440,6 +442,28 @@ public class JewelryDAO extends AbstractDAO {
 		}
 		return listItems;
 	}
+	public List<Jewelry> getItemPaginationPro(int offset) {
+		con = DBConnectionUtil.getConnection();
+		String sql = "SELECT p.*, c.name AS catName FROM products p JOIN categories c ON p.id_category = c.id ORDER BY id DESC LIMIT ?, ?";
+		List<Jewelry> listItems = new ArrayList<>();
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, offset);
+			pst.setInt(2, DefineUtilPublicPro.NUMBER_PER_PAGE);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Jewelry jewelry = new Jewelry(rs.getInt("id"), new Category(rs.getInt("id_category"), rs.getString("catName")), rs.getString("sizes"), rs.getString("name"),rs.getString("picture"), rs.getDouble("price"), rs.getInt("sale"), rs.getString("title"), rs.getInt("highlight"),rs.getInt("new_product"),rs.getString("detail"), rs.getTimestamp("created_at"), rs.getTimestamp("updated_at"));
+				listItems.add(jewelry);
+			}
+			;
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+		return listItems;
+	}
 
 	public ArrayList<Jewelry> searchSong(String p) {
 		Jewelry jewelry = null;
@@ -488,5 +512,46 @@ public class JewelryDAO extends AbstractDAO {
 		} finally {
 			DBConnectionUtil.close(rs, pst, con);
 		}
+	}
+
+	public int addCmt(Comment objCmt) {
+		con = DBConnectionUtil.getConnection();
+		int result=0;
+		String sql = "INSERT INTO comments (name,comment,id_pro) VALUE (?,?,?)";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, objCmt.getName());
+			pst.setString(2, objCmt.getCmt());
+			pst.setInt(3, objCmt.getId_pro());
+			result = pst.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+
+		return result;
+	}
+
+	public List<Comment> findCmt(int id_pro) {
+		con = DBConnectionUtil.getConnection();
+		List<Comment> listCmt= new ArrayList<>();
+		String sql = "SELECT * FROM comments WHERE id_pro = ? ORDER BY id DESC";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, id_pro);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Comment cmt= new Comment(rs.getString("name"), rs.getString("comment"), rs.getTimestamp("date_send"), rs.getInt("id_pro"));
+				listCmt.add(cmt);
+			};
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+		return listCmt;
 	}
 }

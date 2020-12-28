@@ -1,3 +1,7 @@
+<%@page import="java.util.Date"%>
+<%@page import="models.Comment"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.Jewelry"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="/templates/public/assets/inc/header.jsp" %>
@@ -9,7 +13,7 @@ Body Section
 	<div class="span9">
     <ul class="breadcrumb">
     <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-    <li><a href="products.html">Items</a> <span class="divider">/</span></li>
+    <li><a href="<%=request.getContextPath() %>/product">Items</a> <span class="divider">/</span></li>
     <li class="active">Preview</li>
     </ul>	
 	<div class="well well-small">
@@ -31,13 +35,20 @@ Body Section
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
             </div>
 			</div>
+			<%
+			int id_product=0;
+        	if(request.getAttribute("jewelryDetail")!=null){
+        		Jewelry jewelryDetail=(Jewelry)request.getAttribute("jewelryDetail");
+        		if(jewelryDetail!=null){
+        			id_product=jewelryDetail.getId();
+			%>
 			<div class="span7">
-				<h3>Name of the Item [$140.00]</h3>
+				<h3><%=jewelryDetail.getName() %> [$<%=jewelryDetail.getPrice() %>]</h3>
 				<hr class="soft"/>
 				
 				<form class="form-horizontal qtyFrm">
 				  <div class="control-group">
-					<label class="control-label"><span>$140.00</span></label>
+					<label class="control-label"><span>$<%=jewelryDetail.getPrice() %></span></label>
 					<div class="controls">
 					<input type="number" class="span6" placeholder="Qty.">
 					</div>
@@ -88,28 +99,7 @@ Body Section
               </li>
             </ul>
             <div id="myTabContent" class="tab-content tabWrapper">
-            <div class="tab-pane fade active in" id="home">
-			  <h4>Product Information</h4>
-                <table class="table table-striped">
-				<tbody>
-				<tr class="techSpecRow"><td class="techSpecTD1">Color:</td><td class="techSpecTD2">Black</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Style:</td><td class="techSpecTD2">Apparel,Sports</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Season:</td><td class="techSpecTD2">spring/summer</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Usage:</td><td class="techSpecTD2">fitness</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Sport:</td><td class="techSpecTD2">122855031</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Brand:</td><td class="techSpecTD2">Shock Absorber</td></tr>
-				</tbody>
-				</table>
-				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-
-			</div>
+           <%=jewelryDetail.getDetail() %>
 			<div class="tab-pane fade" id="profile">
 			<div class="row-fluid">	  
 			<div class="span2">
@@ -380,7 +370,7 @@ Body Section
 			<hr class="soften"/>
 			<div class="row-fluid">	  
 					<div class="span2">
-						<img src="<%=request.getContextPath()%>/templates/public/assets/img/d.jpg" alt="">
+						<img src="<%=request.getContextPath() %>/templates/public/assets/img/d.jpg" alt="">
 					</div>
 					<div class="span6">
 						<h5>Product Name </h5>
@@ -407,8 +397,69 @@ Body Section
 			
 				</div>
             </div>
-
+             <%} }%>
+		<script type="text/javascript">
+					function getComment(){
+						var fullname=$("#fullname").val();
+						var cmt=$("#cmt").val();
+						var id_pro=$("#id_pro").val();
+					$.ajax({
+					url: '<%=request.getContextPath()%>/comment',
+					type : 'POST',
+					cache : false,
+					data : {
+						fullname : fullname,
+						cmt : cmt,
+						id_pro : id_pro
+					},
+					success : function(data) {
+						$("#ajax-data").load(" #ajax-data");
+					},
+					error : function() {
+						alert('Có lỗi xảy ra');
+					}
+				});
+				return false;
+			}
+		</script><br/>
+    	<div id="ajax-data">
+			<%
+				if (session.getAttribute("listCmt") != null) {
+						ArrayList<Comment> listCmt = (ArrayList<Comment>) session.getAttribute("listCmt");
+						if(listCmt.size()>0){
+			%>
+				<p style='color: green;'>Lượt bình luận : <%=listCmt.size()%></p>
+				<span style='color: blue;'>Bình luận đã có </span></br>
+			<%
+				for (Comment objCmt : listCmt) {
+			%>
+			<div class="item-cmt">
+				<span><%=objCmt.getName()%></span>&nbsp;&nbsp;&nbsp;
+				<span style="color: #FE2EC8;"><%=objCmt.getCmt()%></span>&nbsp;&nbsp;&nbsp;
+				 <span style="color: green;"><%=objCmt.getDate_send()%></span> 
+			</div>
+			<%
+				}
+						}else{
+			%>
+			<p>Hãy là người bình luận đầu tiên</p>
+			<%
+				}}else{
+			%>
+			<p>Hãy là người bình luận đầu tiên</p>
+			<%
+				}
+			%>
+		</div>
 </div>
+	<form action="javascript:void(0)" method="get">
+		   <label style="color:red;" >(*)Name</label>
+		   <input type="hidden" value="<%=id_product%>" name="id_pro" id="id_pro"/>
+		   <input style="width: 150px;" type="text" class="span6" name="fullname" id="fullname" placeholder="name"><br/>
+		   <label style="color:red;">(*)Content</label>
+		   <textarea style="width: 690px;" rows="6" name="cmt" id="cmt" placeholder="comment"></textarea><br/>
+		   <button onclick="getComment()"><span class="icon-comment"></span> Post</button>
+ 	</form>
 </div>
 </div> <!-- Body wrapper -->
 <!--

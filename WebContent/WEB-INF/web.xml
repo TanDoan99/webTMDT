@@ -129,15 +129,6 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>PublicLoginController</servlet-name>
-  	<servlet-class>controllers.publics.PublicLoginController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>PublicLoginController</servlet-name>
-  	<url-pattern>/login_index</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
   	<servlet-name>PublicRegisterController</servlet-name>
   	<servlet-class>controllers.publics.PublicRegisterController</servlet-class>
   </servlet>
@@ -145,6 +136,24 @@
   	<servlet-name>PublicRegisterController</servlet-name>
   	<url-pattern>/register_index</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+		<servlet-name>PublicCommentController</servlet-name>
+		<servlet-class>controllers.publics.PublicCommentController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PublicCommentController</servlet-name>
+		<url-pattern>/comment</url-pattern>
+	</servlet-mapping>
+	
+  <servlet>
+		<servlet-name>PublicDelCartController</servlet-name>
+		<servlet-class>controllers.publics.PublicDelCartController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PublicDelCartController</servlet-name>
+		<url-pattern>/delcart</url-pattern>
+	</servlet-mapping>
   <!-- admin -->
   
   <servlet>
@@ -290,6 +299,15 @@
 		<servlet-name>LoginController</servlet-name>
 		<url-pattern>/auth/login</url-pattern>
 	</servlet-mapping>
+	
+  <servlet>
+		<servlet-name>LoginPublicController</servlet-name>
+		<servlet-class>controllers.auth.LoginPublicController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginPublicController</servlet-name>
+		<url-pattern>/auth/login_index</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>LogoutController</servlet-name>
@@ -299,4 +317,14 @@
 		<servlet-name>LogoutController</servlet-name>
 		<url-pattern>/auth/logout</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LogoutPublicController</servlet-name>
+		<servlet-class>controllers.auth.LogoutPublicController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutPublicController</servlet-name>
+		<url-pattern>/auth/logout_index</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

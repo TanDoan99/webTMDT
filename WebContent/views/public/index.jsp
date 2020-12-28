@@ -38,7 +38,7 @@ Body Section
             	for(Slides objSlide: list){
             %>
 			  <div class="item">
-                <img style="width:100%" src="<%=request.getContextPath()%>/templates/public/assets/img/<%=objSlide.getImg() %>" alt="bootstrap ecommerce templates">
+                <img  src="<%=request.getContextPath()%>/templates/public/assets/img/<%=objSlide.getImg() %>" alt="bootstrap ecommerce templates">
                 <div class="carousel-caption">
                       <h4><%=objSlide.getCaption() %></h4>
                       <p><span><%=objSlide.getContent()%></span></p>
@@ -134,16 +134,16 @@ New Products
                       			listJewelry = (List<Jewelry>)request.getAttribute("jewelryList");
                       			//out.print(listJewelry.size());
                       			int cat_id = 0;
-                          		int i = 0;
+                          		//int i = 0;
                       			if(listJewelry.size()>0){
                       				for(Jewelry objJewelry: listJewelry){
-                      					i++;
+                      					//i++;
                       					cat_id=jewelryDAO.findCatIdIndex(objJewelry.getId());
-                      					String urlSlug=request.getContextPath()+"/chi-tiet/"+StringUtil.makeSlug(objJewelry.getName())+"-"+objJewelry.getId() + "-" + objJewelry.getId_category().getId() + ".html";
+                      					//String urlSlug=request.getContextPath()+"/chi-tiet/"+StringUtil.makeSlug(objJewelry.getName())+"-"+objJewelry.getId() + "-" + objJewelry.getId_category().getId() + ".html";
                        	%>
 			<li class="span4">
 			  <div class="thumbnail">
-				<a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+				<a class="zoomTool" href="<%=request.getContextPath() %>/product_details?id=<%=objJewelry.getId()%>&&cat_id=<%=objJewelry.getId_category().getId() %>" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
 				<a href="product_details.html">
 				<%
                                         		if(!"".equals(objJewelry.getPicture())){
@@ -156,7 +156,7 @@ New Products
 				<div class="caption cntr">
 					<p><%=objJewelry.getName() %></p>
 					<p><strong> $<%=objJewelry.getPrice() %></strong></p>
-					<h4><a class="shopBtn" href="#" title="add to cart"> Add to cart </a></h4>
+					<h4><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=objJewelry.getId()%>)"> Add to cart </a></h4>
 					<div class="actionList">
 						<a class="pull-left" href="#">Add to Wish List </a> 
 						<a class="pull-left" href="#"> Add to Compare </a>
@@ -277,4 +277,27 @@ New Products
 <!--
 Footer
 -->
+<script>
+	function addToCart(id){
+		//alert("đã goi hàm");
+		$.ajax({
+			url: '<%=request.getContextPath()%>/index.html',
+			type: 'POST',
+			cache: false,
+			data: {
+				aid : id
+			},
+			success: function(data){
+				//$("#img"+x).attr("src",data);
+				//alert('Đã lưu vào giỏ hàng');
+				alert(data);
+				$('#sizeCart').html(data);
+			},
+			error: function (){
+				alert('Có lỗi xảy ra');
+			}
+		});
+		return false;
+	}
+</script>
 <%@include file="/templates/public/assets/inc/footer.jsp" %>

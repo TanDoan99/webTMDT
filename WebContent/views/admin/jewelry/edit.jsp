@@ -87,7 +87,7 @@
                                          <input type="text" name="name"value="<%=jewelry.getName() %>" class="form-control" />
                                     </div>
                                      <div class="form-group">
-                                      <img alt="<%=request.getContextPath() %>/uploads/images/main_bg.gif" src="<%=request.getContextPath() %>/uploads/images/<%=jewelry.getPicture()%>"><br/>
+                                      <img width="200px" height="200px"	 alt="<%=request.getContextPath() %>/uploads/images/main_bg.gif" src="<%=request.getContextPath() %>/uploads/images/<%=jewelry.getPicture()%>"><br/>
                                         <label for="picture">Hình ảnh sản phẩm</label>
                                         <input type="file" name="picture" />
                                     </div>

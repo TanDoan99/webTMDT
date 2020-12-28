@@ -4,7 +4,7 @@ Clients
 -->
 <section class="our_client">
 	<hr class="soften"/>
-	<h4 class="title cntr"><span class="text">Manufactures</span></h4>
+	<h4 class="title cntr"><span class="text" style="color: #A9F5F2">Manufactures</span></h4>
 	<hr class="soften"/>
 	<div class="row">
 		<div class="span2">
@@ -77,7 +77,7 @@ accompanied by English versions from the 1914 translation by H. Rackham.
 		<a href="#"><img src="<%=request.getContextPath()%>/templates/public/assets/img/visa.png" alt="payment"></a>
 		<a href="#"><img src="<%=request.getContextPath()%>/templates/public/assets/img/disc.png" alt="payment"></a>
 	</p>
-	<span>Copyright &copy; 2013<br> bootstrap ecommerce shopping template</span>
+	<span>Copyright &copy; 2020<br> bootstrap ecommerce shopping template</span>
 </div>
 </div>
 <a href="#"id="back-to-top" class="gotop"><i class="icon-double-angle-up"></i></a>
