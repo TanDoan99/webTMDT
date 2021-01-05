@@ -1,24 +1,38 @@
+<%@page import="controllers.publics.PublicIndexController"%>
 <%@page import="utils.StringUtil"%>
 <%@page import="daos.CatDAO"%>
 <%@page import="models.Category"%>
 <%@page import="java.util.List"%>
 <div id="sidebar" class="span3">
 <div class="well well-small">
-	<ul class="nav nav-list">
+	<div class="widget accordion-widget category-accordions">
+    <h1 class="border">Category Tree</h1>
+    <div class="accordion">
 		<%
  	  CatDAO catDAO=new CatDAO();
       List<Category> catList= catDAO.findAll();
          if(catList.size()>0){
         	
           for(Category objCat:catList){
+        	  if(objCat.getParent_id()==0){
           	String catName=objCat.getName();
           	//String urlSlug = request.getContextPath()+"/loai-san-pham/"+StringUtil.makeSlug(objCat.getName())+"-"+objCat.getId()+".html";
  		 %>
-		<li><a href="<%=request.getContextPath()%>/list_view?id=<%=objCat.getId()%>"><span class="icon-compass"></span><%=catName %></a></li>
-		<li style="border:0"> &nbsp;</li>
-		<% }} %>
-		<li> <a class="totalInCart" href="cart.html"><strong>Total Amount  <span class="badge badge-warning pull-right" style="line-height:18px;">$448.42</span></strong></a></li>
-	</ul>
+ 		 	<div class="accordion-group">
+            					<div class="accordion-heading">	
+                        		 <a Style="text-decoration: none;" class="accordion-toggle collapsed" data-toggle="collapse" href="#<%=objCat.getId()%>"><%=catName%></a>
+                     			</div>
+           							 <div id="<%=objCat.getId()%>" class="accordion-body collapse">
+               							 <div  class="accordion-inner">
+               			<%PublicIndexController.showCat(request, out, objCat.getId()); %>
+		 				 </div><!-- /.accordion-inner -->
+   					 	 </div>
+						 </div><!-- /.accordion-group -->		
+		<% }}} %>
+	<br/>
+	<a class="totalInCart" href="cart.html"><strong>Total Amount  <span class="badge badge-warning pull-right" style="line-height:18px;">$448.42</span></strong></a>
+</div>
+</div>
 </div>
 
 			  <div class="well well-small alert alert-warning cntr">

@@ -1,3 +1,5 @@
+<%@page import="controllers.admins.cat.AdminIndexCatController"%>
+<%@page import="controllers.admins.cat.AdminAddCatController"%>
 <%@page import="models.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -84,6 +86,7 @@
                                        if(catList.size()>0){
                                              for(Category cat:catList){
                                              	String name =cat.getName();
+                                            	if(cat.getParent_id()==0){
                                 %>
                                     <tr>
                                         <td><%=cat.getId() %></td>
@@ -93,7 +96,9 @@
                                             <a href="<%=request.getContextPath()%>/admin/cat/del?id=<%=cat.getId() %>" title="" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục không?')"><i class="fa fa-pencil"></i> Xóa</a>
                                         </td>
                                     </tr>
+                                    <%AdminIndexCatController.showCat(request, out, cat.getId(), "|---"); %>
 									<%
+                                            	}
                                              }
                                 		}
                                 	}

@@ -27,7 +27,6 @@ public class LoginController extends HttpServlet {
 		request.setAttribute("username", username);
 		//kiem tra thong tin dang nhap
 		User userInfo =userDAO.findUsernameAndPassword(username, password);
-		
 		if(userInfo!=null) {
 			//
 			//

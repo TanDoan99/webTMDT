@@ -2,6 +2,7 @@ package controllers.publics;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import models.Jewelry;
 
 public class PublicCartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	List<Cart> listCart =new ArrayList<Cart>();
 	public PublicCartController() {
 		super();
 	}
@@ -25,8 +26,13 @@ public class PublicCartController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session=request.getSession();
+		try {
+			int id = Integer.parseInt(request.getParameter("aid"));
+			listCart.removeIf(obj -> obj.getId() == id);
+		} catch (Exception e) {
+		}
 		CartDAO cartDAO=new CartDAO();
-		List<Cart> listCart=(List<Cart>)session.getAttribute("listCart");
+		 listCart=(List<Cart>)session.getAttribute("listCart");
 		request.setAttribute("listCart", listCart);
 		request.getRequestDispatcher("/views/public/cart.jsp").forward(request, response);
 	}
@@ -40,7 +46,7 @@ public class PublicCartController extends HttpServlet {
 		Jewelry jewelry = jewelryDAO.findOne(id);
 		HttpSession session=request.getSession();
 		Cart cart=new Cart(id, jewelry, number);
-		List<Cart> listCart=(List<Cart>)session.getAttribute("listCart");
+		listCart=(List<Cart>)session.getAttribute("listCart");
 		for(Cart objCart:listCart) {
 			if(id==objCart.getProduct().getId()&&number==1) {
 				objCart.setNumber(objCart.getNumber()+1);

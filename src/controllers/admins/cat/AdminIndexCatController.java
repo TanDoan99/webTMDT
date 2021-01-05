@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 
 import daos.CatDAO;
 import models.Category;
@@ -69,5 +70,16 @@ public class AdminIndexCatController extends HttpServlet {
 			throws ServletException, IOException {
 
 	}
-
+	public static void showCat(HttpServletRequest request, JspWriter out, int parentId, String menu) throws ServletException, IOException {
+		CatDAO catDAO = new CatDAO();
+		List<Category> catListChild = catDAO.findCategoryParentById(parentId);
+		if(catListChild.size()>0) {
+				
+			for (Category category : catListChild) {
+				out.print("<tr class='center'><td class='center'>"+category.getId()+"</td><td>"+menu+category.getName()+"</td><td><a href='"+request.getContextPath()+"/admin/cat/edit?id="+category.getId()+"' class='btn btn-primary'><i class='fa fa-edit'></i> Sửa</a>&nbsp;<a href='"+request.getContextPath()+"/admin/cat/del?id="+category.getId()+"' id="+category.getId()+" class='btn btn-danger' onclick=\"return confirm('Bạn có chắc chắn muốn xóa danh mục không?')\"><i class='fa fa-pencil'></i> Xóa</a></td></tr>");
+    			showCat(request, out, category.getId(), menu+"|---");
+			}
+			
+		}
+	}
 }

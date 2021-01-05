@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspWriter;
 
 import daos.CatDAO;
 import daos.JewelryDAO;
@@ -103,5 +104,36 @@ public class PublicIndexController extends HttpServlet {
 		out.print(listCart.size());
 
 	}
+	public static void showCat(HttpServletRequest request, JspWriter out, int parentId)
+			throws ServletException, IOException {
+		CatDAO catDAO = new CatDAO();
+		String link = "";
+		String collapse = "";
+		List<Category> catList = catDAO.findCategoryParentById(parentId);
+		if (catList.size() > 0) {
 
+			for (Category category : catList) {
+				List<Category> catListChild = catDAO.findCategoryParentById(category.getId());
+				if (catListChild.size() > 0) {
+					link = "#" + category.getId();
+					collapse = "collapse";
+				} else {
+					link = request.getContextPath() + "/list_view?id=" + category.getId();
+					collapse = "";
+				}
+				out.println("<ul>");
+				out.println("<li>");
+				out.println("<div class='accordion-heading' id='showCat"+category.getId()+"'>");
+				out.println("<a Style='padding-left: 10px;' href='" + link + "' data-toggle='" + collapse + "'>" + category.getName() + "</a>");
+				out.println("</div>");
+				out.println("<div Style='padding-left: 10px;' id=" + category.getId() + " class='accordion-body collapse in'>");
+
+				showCat(request, out, category.getId());
+				out.println("</div>");
+				out.println("</li>");
+				out.println("</ul>");
+			}
+
+		}
+	}
 }

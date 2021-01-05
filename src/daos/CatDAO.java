@@ -18,7 +18,7 @@ public class CatDAO extends AbstractDAO {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
-				Category cat = new Category(rs.getInt("id"), rs.getString("name"), rs.getString("description"));
+				Category cat = new Category(rs.getInt("id"), rs.getString("name"),rs.getInt("parent_id"), rs.getString("description"));
 				list.add(cat);
 			}
 			;
@@ -34,11 +34,12 @@ public class CatDAO extends AbstractDAO {
 	public int add(Category cat) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "INSERT INTO categories (name,description) VALUE(?,?)";
+		String sql = "INSERT INTO categories (name, parent_id, description) VALUE(?,?,?)";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, cat.getName());
-			pst.setString(2, cat.getDescription());
+			pst.setInt(2, cat.getParent_id());
+			pst.setString(3, cat.getDescription());
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -69,13 +70,13 @@ public class CatDAO extends AbstractDAO {
 	public Category findEdit(int id) {
 		Category cat = null;
 		con = DBConnectionUtil.getConnection();
-		String sql = "SELECT id, name, description FROM categories WHERE id = ?";
+		String sql = "SELECT * FROM categories WHERE id = ?";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			if (rs.next()) {
-				cat = new Category(rs.getInt("id"), rs.getString("name"), rs.getString("description"));
+				cat = new Category(rs.getInt("id"), rs.getString("name"),rs.getInt("parent_id"), rs.getString("description"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,11 +89,13 @@ public class CatDAO extends AbstractDAO {
 	public int edit(Category cat) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "UPDATE categories SET name = ? WHERE id = ?";
+		String sql = "UPDATE categories SET name = ?, parent_id = ?, description = ? WHERE id = ?";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, cat.getName());
-			pst.setInt(2, cat.getId());
+			pst.setInt(2, cat.getParent_id());
+			pst.setString(3, cat.getDescription());
+			pst.setInt(4, cat.getId());
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -112,7 +115,7 @@ public class CatDAO extends AbstractDAO {
 			pst.setInt(1, catid);
 			rs = pst.executeQuery();
 			if (rs.next()) {
-				cat = new Category(rs.getInt("id"), rs.getString("name"), rs.getString("description"));
+				cat = new Category(rs.getInt("id"), rs.getString("name"),rs.getInt("parent_id"), rs.getString("description"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -144,7 +147,7 @@ public class CatDAO extends AbstractDAO {
 
 	public List<Category> getItemPagination(int offset) {
 		con = DBConnectionUtil.getConnection();
-		String sql = "SELECT * FROM  categories ORDER BY id DESC LIMIT ?, ? ";
+		String sql = "SELECT * FROM  categories ORDER BY id ASC LIMIT ?, ? ";
 		List<Category> listItems = new ArrayList<Category>();
 		try {
 			pst = con.prepareStatement(sql);
@@ -152,7 +155,7 @@ public class CatDAO extends AbstractDAO {
 			pst.setInt(2, DefineUtil.NUMBER_PER_PAGE);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Category cat = new Category(rs.getInt("id"), rs.getString("name"), rs.getString("description"));
+				Category cat = new Category(rs.getInt("id"), rs.getString("name"),rs.getInt("parent_id"), rs.getString("description"));
 				listItems.add(cat);
 			}
 			;
@@ -180,7 +183,7 @@ public class CatDAO extends AbstractDAO {
 			}
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Category scat = new Category(rs.getInt("id"), rs.getString("name"), rs.getString("description"));
+				Category scat = new Category(rs.getInt("id"), rs.getString("name"),rs.getInt("parent_id"), rs.getString("description"));
 				listCat.add(scat);
 			}
 		} catch (Exception e) {
@@ -190,6 +193,26 @@ public class CatDAO extends AbstractDAO {
 		}
 		return listCat;
 
+	}
+	public List<Category> findCategoryParentById(int parentId) {
+		List<Category> list=new ArrayList<>();
+		con = DBConnectionUtil.getConnection();
+		String sql="select * from categories where parent_id=? ";
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, parentId);
+			rs= pst.executeQuery();
+			while (rs.next()) {
+				Category  cat = new Category(rs.getInt("id"), rs.getString("name"),rs.getInt("parent_id"), rs.getString("description"));
+				list.add(cat);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return list;
 	}
 
 }

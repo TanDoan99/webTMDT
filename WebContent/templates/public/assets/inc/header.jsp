@@ -14,6 +14,7 @@
     <meta name="author" content="">
     <!-- Bootstrap styles -->
    <link href="<%=request.getContextPath()%>/templates/public/assets/css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/templates/public/assets/css/main.css">
     <!-- Customize styles -->
     <link href="<%=request.getContextPath()%>/templates/public/assets/css/style.css" rel="stylesheet"/>
     <!-- font awesome styles -->

@@ -25,6 +25,11 @@ public class Cart {
 		this.product = product;
 		this.number=number;
 	}
+	public Cart(int id, Jewelry product) {
+		super();
+		this.id = id;
+		this.product = product;
+	}
 	
 	
 }

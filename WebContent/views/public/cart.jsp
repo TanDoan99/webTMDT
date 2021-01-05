@@ -41,9 +41,9 @@ Body Section
                   <td><span class="shopBtn"><span class="icon-ok"></span></span> </td>
                   <td>$<%=objCart.getProduct().getPrice() %></td>
                   <td>
-					<input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text" value="<%=objCart.getNumber()%>">
+					<input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons<%=objCart.getProduct().getId() %>" size="16" type="text" value="<%=objCart.getNumber()%>">
 				  <div class="input-append">
-					<button onclick="numberCart(<%=objCart.getProduct().getId() %>,0)" class="btn btn-mini" type="button">-</button><button onclick="numberCart(<%=objCart.getProduct().getId() %>,1)" class="btn btn-mini" type="button"> + </button><button class="btn btn-mini btn-danger"  type="button"><span class="icon-remove"></span></button>
+					<button onclick="numberCart(<%=objCart.getProduct().getId() %>,0)" class="btn btn-mini" type="button">-</button><button onclick="numberCart(<%=objCart.getProduct().getId() %>,1)" class="btn btn-mini" type="button"> + </button><button class="btn btn-mini btn-danger" id="delete"  type="button" onclick="deleteCart(<%=objCart.getId()%>)"><span class="icon-remove"></span></button>
 				</div>
 				</td>
                   <td>$10000</td>
@@ -124,7 +124,7 @@ Body Section
 				//$("#img"+x).attr("src",data);
 				//alert('Đã lưu vào giỏ hàng');
 				//alert(data);
-				$('#appendedInputButtons').val(data);
+				$('#appendedInputButtons'+idPro).val(data);
 			},
 			error: function (){
 				alert('Có lỗi xảy ra');
@@ -132,6 +132,22 @@ Body Section
 		});
 		return false;
 		}
+	function deleteCart(id){
+		let check = confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
+		if(check){
+			$.ajax({
+				url: '<%=request.getContextPath()%>/cart',
+				type: 'GET',
+				data: {aid: id},
+				success: function(data){
+					$('#delete').val(data);
+				},
+				error: function (){
+					alert('Có lỗi xảy ra');
+				}
+			});
+		}
+	}
 </script>
 <!--
 Footer
