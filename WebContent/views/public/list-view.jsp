@@ -71,7 +71,9 @@ Body Section
 			<input type="checkbox">  Adds product to compair
 		</label><br>
 		<div class="btn-group">
+		<%if(user!=null){ %>
 		  <span class=" icon-shopping-cart"></span><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=catJewelry.getId()%>)"> Add to cart</a>
+		 <%} %>
 		  <a href="<%=request.getContextPath() %>/product_details?id=<%=catJewelry.getId() %>" class="shopBtn">VIEW</a>
 		 </div>
 			</form>
@@ -135,7 +137,7 @@ Body Section
 			},
 			success: function(data){
 				//$("#img"+x).attr("src",data);
-				//alert('Đã lưu vào giỏ hàng');
+				alert('Đã thêm vào giỏ hàng');
 				//alert(data);
 				$('#sizeCart').html(data);
 			},

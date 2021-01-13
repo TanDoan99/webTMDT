@@ -1,4 +1,4 @@
-package controllers.admins;
+package controllers.admins.comment;
 
 import java.io.IOException;
 
@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import daos.JewelryDAO;
 import utils.AuthUtil;
-public class AdminIndexController extends HttpServlet {
+public class AdminDelCommentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public AdminIndexController() {
+    public AdminDelCommentController() {
         super();
+      
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,13 +21,18 @@ public class AdminIndexController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/auth/login");
 			return;
 		}
-		request.setAttribute("countCat", new JewelryDAO().countCat());
-		request.setAttribute("countSong", new JewelryDAO().countJewelry());
-		request.setAttribute("countUser", new JewelryDAO().countUser());
-		request.setAttribute("countContact", new JewelryDAO().countContact());
-		//request.setAttribute("countUser", new JewelryDAO().countUser());
-		request.setAttribute("countComment", new JewelryDAO().countComment());
-		request.getRequestDispatcher("/views/admin/index.jsp").forward(request, response);
+		JewelryDAO jewelryDAO = new JewelryDAO();
+		int id = Integer.parseInt(request.getParameter("id"));
+		int dele=jewelryDAO.delCmt(id); 
+		if(dele>0) {
+			//xóa thành công
+			response.sendRedirect(request.getContextPath()+"/admin/comment?msg=1");
+			return;
+		}
+		//thất bại
+		response.sendRedirect(request.getContextPath()+"/admin/comment?err=0");
+		return;
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

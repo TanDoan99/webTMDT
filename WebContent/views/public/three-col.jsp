@@ -39,7 +39,9 @@ Three column view
 				<div class="caption cntr">
 					<p><%=listJewelry.get(j).getName() %></p>
 					<p><strong> $<%=listJewelry.get(j).getPrice()%></strong></p>
+					<%if(user!=null){ %>
 					<h4><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=listJewelry.get(j).getId()%>)"> Add to cart </a></h4>
+					<%} %>
 					<div class="actionList">
 						<a class="pull-left" href="#">Add to Wish List </a> 
 						<a class="pull-left" href="#"> Add to Compare </a>
@@ -65,7 +67,9 @@ Three column view
 				<div class="caption cntr">
 					<p><%=listJewelry.get(j+1).getName() %></p>
 					<p><strong> $<%=listJewelry.get(j+1).getPrice()%></strong></p>
+					<%if(user!=null){ %>
 					<h4><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=listJewelry.get(j+1).getId()%>)"> Add to cart </a></h4>
+					<%} %>
 					<div class="actionList">
 						<a class="pull-left" href="#">Add to Wish List </a> 
 						<a class="pull-left" href="#"> Add to Compare </a>
@@ -90,7 +94,9 @@ Three column view
 				<div class="caption cntr">
 					<p><%=listJewelry.get(j+2).getName() %></p>
 					<p><strong> $<%=listJewelry.get(j+2).getPrice()%></strong></p>
+					<%if(user!=null){ %>
 					<h4><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=listJewelry.get(j+2).getId()%>)"> Add to cart </a></h4>
+					<%} %>
 					<div class="actionList">
 						<a class="pull-left" href="#">Add to Wish List </a> 
 						<a class="pull-left" href="#"> Add to Compare </a>
@@ -128,7 +134,9 @@ Three column view
 				<div class="caption cntr">
 					<p><%=listJewelry.get(listJewelry.size()-m).getName() %></p>
 					<p><strong> $<%=listJewelry.get(listJewelry.size()-m).getPrice() %></strong></p>
+					<%if(user!=null){ %>
 					<h4><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=listJewelry.get(listJewelry.size()-m).getId()%>)"> Add to cart </a></h4>
+					<%} %>
 					<div class="actionList">
 						<a class="pull-left" href="#">Add to Wish List </a> 
 						<a class="pull-left" href="#"> Add to Compare </a>
@@ -157,7 +165,7 @@ Three column view
 				aid : id
 			},
 			success: function(data){
-				//alert('Đã lưu vào giỏ hàng');
+				alert('Đã thêm vào giỏ hàng');
 				//alert(data);
 				$('#sizeCart').html(data);
 			},

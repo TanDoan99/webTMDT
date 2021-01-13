@@ -54,6 +54,7 @@ encoding//src/models/User.java=UTF-8
 encoding//src/utils/AuthUtil.java=UTF-8
 encoding//src/utils/DBConnectionUtil.java=UTF-8
 encoding//src/utils/DefineUtil.java=UTF-8
+encoding//src/utils/DefineUtilCmt.java=UTF-8
 encoding//src/utils/DefineUtilPublic.java=UTF-8
 encoding//src/utils/DefineUtilPublicPro.java=UTF-8
 encoding//src/utils/FileUtil.java=UTF-8

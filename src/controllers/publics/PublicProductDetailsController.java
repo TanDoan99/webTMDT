@@ -25,8 +25,6 @@ public class PublicProductDetailsController extends HttpServlet {
 		try {
 			id = Integer.parseInt(request.getParameter("id"));
 		} catch (Exception e) {
-			response.sendRedirect(request.getContextPath() + "/404");
-			return;
 		}
 		HttpSession session = request.getSession();
 		Jewelry jewelryDetail = jewelryDAO.getDetail(id);

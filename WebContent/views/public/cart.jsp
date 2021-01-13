@@ -4,7 +4,7 @@
 <!-- 
 Body Section 
 -->
-	<div class="row">
+	<div class="row" id="body">
 	<div class="span12">
     <ul class="breadcrumb">
 		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
@@ -13,7 +13,7 @@ Body Section
 	<div class="well well-small">
 		<h1>Check Out <small class="pull-right"> <span id="sizeCart"><%if(listCart!=null) out.print(listCart.size());else out.print(0); %> </span> Items are in the cart </small></h1>
 	<hr class="soften"/>	
-	<table class="table table-bordered table-condensed">
+	<table class="table table-bordered table-condensed" id="table">
               <thead>
                 <tr>
                   <th>Product</th>
@@ -26,10 +26,11 @@ Body Section
 				</tr>
               </thead>
 				<%
+					double tong=0;
 					if(session.getAttribute("listCart")!=null){
 						List<Cart> listCartPro=(List<Cart>)session.getAttribute("listCart");
 						for(Cart objCart:listCartPro){
-					
+						
 				%>
               <tbody>
               	
@@ -37,27 +38,34 @@ Body Section
                   <!-- <td><img width="100" src="assets/img/e.jpg" alt=""></td> -->
                   
                   <td><%=objCart.getProduct().getName() %>  </td>
-                  <td><img style="width: 200px;height: 200px;" alt="<%=request.getContextPath() %>/templates/public/assets/img/<%=objCart.getProduct().getPicture() %>" src="<%=request.getContextPath() %>/templates/public/assets/img/<%=objCart.getProduct().getPicture() %>"></td>
+                  <td>
+                  <%-- <img style="width: 200px;height: 200px;" alt="<%=request.getContextPath() %>/templates/public/assets/img/<%=objCart.getProduct().getPicture() %>" src="<%=request.getContextPath() %>/templates/public/assets/img/<%=objCart.getProduct().getPicture() %>"> --%>
+                  <%
+                                        		if(!"".equals(objCart.getProduct().getPicture())){
+                                        	%>
+											<img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=objCart.getProduct().getPicture() %>" alt="<%=objCart.getProduct().getPicture() %>"/>
+                                        	<%}else{%>
+											<img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/>
+                                      		<%} %>
+                  </td>
                   <td><span class="shopBtn"><span class="icon-ok"></span></span> </td>
-                  <td>$<%=objCart.getProduct().getPrice() %></td>
+                  <td >$<%=objCart.getProduct().getPrice() %></td>
                   <td>
 					<input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons<%=objCart.getProduct().getId() %>" size="16" type="text" value="<%=objCart.getNumber()%>">
 				  <div class="input-append">
-					<button onclick="numberCart(<%=objCart.getProduct().getId() %>,0)" class="btn btn-mini" type="button">-</button><button onclick="numberCart(<%=objCart.getProduct().getId() %>,1)" class="btn btn-mini" type="button"> + </button><button class="btn btn-mini btn-danger" id="delete"  type="button" onclick="deleteCart(<%=objCart.getId()%>)"><span class="icon-remove"></span></button>
+					<button onclick="numberCart(<%=objCart.getProduct().getId() %>,0,<%=objCart.getProduct().getPrice() %>)" class="btn btn-mini" type="button">-</button><button onclick="numberCart(<%=objCart.getProduct().getId() %>,1,<%=objCart.getProduct().getPrice() %>)" class="btn btn-mini" type="button"> + </button><button class="btn btn-mini btn-danger" id="delete"  type="button" onclick="deleteCart(<%=objCart.getId()%>)"><span class="icon-remove"></span></button>
 				</div>
 				</td>
-                  <td>$10000</td>
+                  <td id="giasp<%=objCart.getProduct().getId()%>">$<%=objCart.getProduct().getPrice()*objCart.getNumber() %></td>
                 </tr>
-				
-		
-		<%}} %> 
+		<%
+		  double priceTong=objCart.getProduct().getPrice()*objCart.getNumber();
+		  tong+=priceTong;
+		}}
+		 %> 
 				<tr>
                   <td colspan="6" class="alignR">Total products:	</td>
-                  <td> $448.42</td>
-                </tr>
-				<tr>
-                  <td colspan="6" class="alignR">Total products:	</td>
-                  <td class="label label-primary"> $448.42</td>
+                  <td class="label label-primary" id="sum" > $<%=tong %></td>
                 </tr>
 			</tbody>
             </table><br/>
@@ -75,34 +83,7 @@ Body Section
 				
 			</tbody>
 				</table>
-			<table class="table table-bordered">
-			<tbody>
-                <tr><td>ESTIMATE YOUR SHIPPING & TAXES</td></tr>
-                 <tr> 
-				 <td>
-					<form class="form-horizontal">
-					  <div class="control-group">
-						<label class="span2 control-label" for="inputEmail">Country</label>
-						<div class="controls">
-						  <input type="text" placeholder="Country">
-						</div>
-					  </div>
-					  <div class="control-group">
-						<label class="span2 control-label" for="inputPassword">Post Code/ Zipcode</label>
-						<div class="controls">
-						  <input type="password" placeholder="Password">
-						</div>
-					  </div>
-					  <div class="control-group">
-						<div class="controls">
-						  <button type="submit" class="shopBtn">Click to check the price</button>
-						</div>
-					  </div>
-					</form> 
-				  </td>
-				  </tr>
-              </tbody>
-            </table>		
+					
 	<a href="<%=request.getContextPath() %>/product" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
 	<a href="login.html" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
 
@@ -110,8 +91,9 @@ Body Section
 </div>
 </div>
 <script type="text/javascript">
-	function numberCart(idPro,number){
+	function numberCart(idPro,number,price){
 		//alert("hàm đã tạo");
+		//alert(price)
 		$.ajax({
 			url: '<%=request.getContextPath()%>/cart',
 			type: 'POST',
@@ -124,7 +106,13 @@ Body Section
 				//$("#img"+x).attr("src",data);
 				//alert('Đã lưu vào giỏ hàng');
 				//alert(data);
-				$('#appendedInputButtons'+idPro).val(data);
+				let listNumber =JSON.parse(data);
+				if(listNumber.length>0){
+				$('#appendedInputButtons'+idPro).val(listNumber[0]);
+				$('#giasp'+idPro).text('$'+listNumber[0]*price);
+				$('#sum').text('$'+listNumber[1]);
+				//alert(data*price);
+				}
 			},
 			error: function (){
 				alert('Có lỗi xảy ra');
@@ -140,7 +128,9 @@ Body Section
 				type: 'GET',
 				data: {aid: id},
 				success: function(data){
-					$('#delete').val(data);
+					//alert(data);
+					$('#table').load(' #table');
+					$('#del').load(' #del');
 				},
 				error: function (){
 					alert('Có lỗi xảy ra');
@@ -148,7 +138,30 @@ Body Section
 			});
 		}
 	}
+	
 </script>
+<style>
+	.le-button {
+  float: right;
+  border-radius: 0 5px 5px 0;
+}
+.le-button {
+	background-color:green;
+  border-radius: 4px;
+  font-weight: bold;
+  padding: 10px 20px;
+  display: inline-block;
+  line-height: 20px;
+  border: none;
+  font-size: 15px;
+  color: black;
+  text-transform: capitalize;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+</style>
 <!--
 Footer
 -->

@@ -2,6 +2,8 @@
 <%@page import="daos.JewelryDAO"%>
 <%@page import="models.Slides"%>
 <%@page import="daos.SlidesDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="/templates/public/assets/inc/header.jsp" %>
 <style>
 	/* thiết lập style cho thẻ a */
@@ -156,7 +158,9 @@ New Products
 				<div class="caption cntr">
 					<p><%=objJewelry.getName() %></p>
 					<p><strong> $<%=objJewelry.getPrice() %></strong></p>
+					<%if(user!=null){ %>
 					<h4><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=objJewelry.getId()%>)"> Add to cart </a></h4>
+					<%} %>
 					<div class="actionList">
 						<a class="pull-left" href="#">Add to Wish List </a> 
 						<a class="pull-left" href="#"> Add to Compare </a>
@@ -274,6 +278,7 @@ New Products
 	</div>
 	</div>
 	</div>
+	<div style="display: none;" id="result" ></div>
 <!--
 Footer
 -->
@@ -289,8 +294,8 @@ Footer
 			},
 			success: function(data){
 				//$("#img"+x).attr("src",data);
-				//alert('Đã lưu vào giỏ hàng');
-				alert(data);
+				alert('Đã thêm vào giỏ hàng');
+				//alert(data);
 				$('#sizeCart').html(data);
 			},
 			error: function (){

@@ -80,7 +80,9 @@ Body Section
 				  <p>Nowadays the lingerie industry is one of the most successful business spheres.
 				  Nowadays the lingerie industry is one of ...
 				  <p>
-				  <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Add to cart</button>
+				  <%if(user!=null){ %>
+				  <button type="submit" class="shopBtn" onclick="addToCart(<%=id_product%>)"><span class=" icon-shopping-cart"></span> Add to cart</button>
+				  <%} %>
 				</form>
 			</div>
 			</div>
@@ -399,6 +401,26 @@ Body Section
             </div>
              <%} }%>
 		<script type="text/javascript">
+		function addToCart(id){
+			//alert("đã goi hàm");
+			$.ajax({
+				url: '<%=request.getContextPath()%>/index.html',
+				type: 'POST',
+				cache: false,
+				data: {
+					aid : id
+				},
+				success: function(data){
+					alert('Đã thêm vào giỏ hàng');
+					//alert(data);
+					$('#sizeCart').html(data);
+				},
+				error: function (){
+					alert('Có lỗi xảy ra');
+				}
+			});
+			return false;
+		}
 					function getComment(){
 						var fullname=$("#fullname").val();
 						var cmt=$("#cmt").val();

@@ -154,6 +154,23 @@
 		<servlet-name>PublicDelCartController</servlet-name>
 		<url-pattern>/delcart</url-pattern>
 	</servlet-mapping>
+	
+  <servlet>
+		<servlet-name>PublicCheckOutController</servlet-name>
+		<servlet-class>controllers.publics.PublicCheckOutController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PublicCheckOutController</servlet-name>
+		<url-pattern>/checkout</url-pattern>
+	</servlet-mapping>
+  <servlet>
+		<servlet-name>PageNotFound</servlet-name>
+		<servlet-class>controllers.publics.PageNotFound</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PageNotFound</servlet-name>
+		<url-pattern>/404</url-pattern>
+	</servlet-mapping>
   <!-- admin -->
   
   <servlet>
@@ -289,6 +306,24 @@
 	<servlet-mapping>
 		<servlet-name>AdminDelContactController</servlet-name>
 		<url-pattern>/admin/contact/del</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminIndexCommentController</servlet-name>
+		<servlet-class>controllers.admins.comment.AdminIndexCommentController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminIndexCommentController</servlet-name>
+		<url-pattern>/admin/comment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminDelCommentController</servlet-name>
+		<servlet-class>controllers.admins.comment.AdminDelCommentController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminDelCommentController</servlet-name>
+		<url-pattern>/admin/comment/del</url-pattern>
 	</servlet-mapping>
   <!-- login/logout -->
   <servlet>

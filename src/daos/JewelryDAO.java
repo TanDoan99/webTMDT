@@ -7,9 +7,11 @@ import java.util.List;
 
 import models.Category;
 import models.Comment;
+import models.Contact;
 import models.Jewelry;
 import utils.DBConnectionUtil;
 import utils.DefineUtil;
+import utils.DefineUtilCmt;
 import utils.DefineUtilPublic;
 import utils.DefineUtilPublicPro;
 
@@ -261,7 +263,41 @@ public class JewelryDAO extends AbstractDAO {
 		}
 		return count;
 	}
+	public Object countContact() {
+		int count = 0;
+		con = DBConnectionUtil.getConnection();
+		String sql = "SELECT COUNT(id) FROM contacts";
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return count;
+	}
 
+	public Object countComment() {
+		int count = 0;
+		con = DBConnectionUtil.getConnection();
+		String sql = "SELECT COUNT(id) FROM comments";
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return count;
+	}
 	public int add(Jewelry jewelry) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
@@ -554,4 +590,65 @@ public class JewelryDAO extends AbstractDAO {
 		}
 		return listCmt;
 	}
+
+	public int delCmt(int id) {
+		int result = 0;
+		con = DBConnectionUtil.getConnection();
+		String sql = "DELETE FROM comments WHERE id=?";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, id);
+			result = pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+		return result;
+	}
+
+	public List<Comment> findComment() {
+		con = DBConnectionUtil.getConnection();
+		List<Comment> listCmt= new ArrayList<>();
+		String sql = "SELECT * FROM comments  ORDER BY id DESC";
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Comment cmt= new Comment(rs.getInt("id"),rs.getString("name"), rs.getString("comment"), rs.getTimestamp("date_send"), rs.getInt("id_pro"));
+				listCmt.add(cmt);
+			};
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return listCmt;
+	}
+
+	public List<Comment> getItemPaginationComment(int offset) {
+		con = DBConnectionUtil.getConnection();
+		String sql = "SELECT * FROM comments ORDER BY id DESC LIMIT ?, ? ";
+		List<Comment> listItems = new ArrayList<>();
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, offset);
+			pst.setInt(2, DefineUtilCmt.NUMBER_PER_PAGE);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Comment cmt =new Comment(rs.getInt("id"), rs.getString("name"), rs.getString("comment"), rs.getTimestamp("date_send"), rs.getInt("id_pro"));
+				listItems.add(cmt);
+			}
+			;
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+		return listItems;
+	}
+
 }

@@ -106,6 +106,12 @@ public class Jewelry {
 	}
 
 
+	public Jewelry(int id) {
+		super();
+		this.id = id;
+	}
+
+
 	
 	
 

@@ -41,7 +41,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="topNav">
 		<div class="container">
-			<div class="alignR">
+			<div class="alignR" id="del">
 				<div class="pull-left socialNw">
 					<a href="#"><span class="icon-twitter"></span></a>
 					<a href="#"><span class="icon-facebook"></span></a>
@@ -58,8 +58,8 @@
 				<a href="<%=request.getContextPath() %>/cart"><span class="icon-shopping-cart"></span><span id="sizeCart"> <%if(listCart!=null) out.print(listCart.size());else out.print(0); %> </span> Item(s) - <span class="badge badge-warning"> $448.42</span></a>
 				<a href="#"><span class="icon-user"></span> 
 				<%
+            	User user=(User)session.getAttribute("userInfo");
             	if(session.getAttribute("userInfo")!=null){
-            		User user=(User)session.getAttribute("userInfo");
             	
             %>
             <div style="color: white;float: right;font-size: 16px;"> Xin chào, <b><%=user.getFullname()%></b> &nbsp; <a href="<%=request.getContextPath() %>/auth/logout_index" >Đăng xuất</a> </div>

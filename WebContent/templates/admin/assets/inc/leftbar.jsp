@@ -27,6 +27,9 @@
             <li>
                 <a id="comment" href="<%=request.getContextPath() %>/admin/cart"><i class="fa fa-shopping-cart fa-3x"></i> Quản lý giỏ hàng</a>
             </li>
+            <li>
+                <a id="comment" href="<%=request.getContextPath() %>/admin/comment"><i class="fa fa-comment fa-3x"></i> Quản lý bình luận</a>
+            </li>
         </ul>
     </div>
 </nav>

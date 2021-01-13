@@ -118,7 +118,9 @@ New Products
 					<%=objJewelry.getPrice()%>
 				</div>
 				<div class="mua">
+				 <%if(user!=null){ %>
 				<center><a  href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=objJewelry.getId()%>)"> <button class="btn btn-success succ">Mua ngay</button> </a></center>
+				<%} %>
 				</div>
 		</div>
 	</div>
@@ -180,7 +182,7 @@ New Products
 				aid : id
 			},
 			success: function(data){
-				//alert('Đã lưu vào giỏ hàng');
+				alert('Đã thêm sản phẩm vào giỏ hàng');
 				//alert(data);
 				$('#sizeCart').html(data);
 			},

@@ -36,7 +36,9 @@ Three column view
 				<div class="caption cntr">
 					<p><%=objJewe.getName() %></p>
 					<p><strong> $<%=objJewe.getPrice() %></strong></p>
+					<%if(user!=null){ %>
 					<h4><a class="shopBtn" href="javascript:void(0)" title="add to cart" onclick="addToCart(<%=objJewe.getId()%>)"> Add to cart </a></h4>
+					<%} %>
 					<div class="actionList">
 						<a class="pull-left" href="#">Add to Wish List </a> 
 						<a class="pull-left" href="#"> Add to Compare </a>
@@ -58,7 +60,7 @@ Three column view
 				aid : id
 			},
 			success: function(data){
-				//alert('Đã lưu vào giỏ hàng');
+				alert('Đã thêm vào giỏ hàng');
 				//alert(data);
 				$('#sizeCart').html(data);
 			},
