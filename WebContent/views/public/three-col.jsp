@@ -30,9 +30,9 @@ Three column view
 					<% 
 					if(!"".equals(listJewelry.get(j).getPicture())){
                                         	%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=listJewelry.get(j).getPicture() %>" alt=""/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=listJewelry.get(j).getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=listJewelry.get(j).getPicture() %>" alt=""/></a>
                                         	<%}else{%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=listJewelry.get(j).getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/></a>
                                       		<%} %>
 
 				</a>
@@ -58,9 +58,9 @@ Three column view
 					<% 
 					if(!"".equals(listJewelry.get(j+1).getPicture())){
                                         	%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=listJewelry.get(j+1).getPicture() %>" alt=""/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=listJewelry.get(j).getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=listJewelry.get(j+1).getPicture() %>" alt=""/></a>
                                         	<%}else{%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=listJewelry.get(j).getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/></a>
                                       		<%} %>
 
 				</a>
@@ -86,9 +86,9 @@ Three column view
 				<% 
 					if(!"".equals(listJewelry.get(j+2).getPicture())){
                                         	%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=listJewelry.get(j+2).getPicture() %>" alt=""/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=listJewelry.get(j).getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=listJewelry.get(j+2).getPicture() %>" alt=""/></a>
                                         	<%}else{%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=listJewelry.get(j).getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/></a>
                                       		<%} %>
 				</a>
 				<div class="caption cntr">

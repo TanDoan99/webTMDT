@@ -85,7 +85,7 @@ Body Section
 				</table>
 					
 	<a href="<%=request.getContextPath() %>/product" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
-	<a href="login.html" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
+	<a href="<%=request.getContextPath() %>/checkout" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
 
 </div>
 </div>

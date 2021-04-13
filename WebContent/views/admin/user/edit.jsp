@@ -15,12 +15,16 @@
       		String err = (String) request.getParameter("err");
       	  	String username=request.getParameter("username");
       	  	String fullname=request.getParameter("fullname");
-      	  	String emailname=request.getParameter("emailname");
+      	  	String email=request.getParameter("emailname");
+      	  	String address=request.getParameter("address");
+      	  	String telephone_number=request.getParameter("telephone_number");
       	  User user=(User)request.getAttribute("user");
   		if(user!=null){
   			username=user.getUsername();
   			fullname=user.getFullname();
-  			emailname=user.getEmail();
+  			email=user.getEmail();
+  			address=user.getAddress();
+  			telephone_number=user.getTelephone_number();
   		}
            	if("0".equals(err)) {
           %>
@@ -41,6 +45,24 @@
 		%>
 		<% 
 			if("3".equals(err)) {
+         %>
+			<div class="alert alert-danger" role="alert">
+ 				Vui lòng nhập email !
+			</div>
+		<%
+			}
+		%>
+		<% 
+			if("4".equals(err)) {
+         %>
+			<div class="alert alert-danger" role="alert">
+ 				Vui lòng nhập email !
+			</div>
+		<%
+			}
+		%>
+		<% 
+			if("5".equals(err)) {
          %>
 			<div class="alert alert-danger" role="alert">
  				Vui lòng nhập email !
@@ -71,7 +93,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="text" id="email" value="<%if(emailname!=null)out.print(emailname); %>" name="emailname" class="form-control" />
+                                        <input type="text" id="email" value="<%if(email!=null)out.print(email); %>" name="email" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" id="address" value="<%if(address!=null)out.print(address); %>" name="address" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telephone_number">	telephone_number</label>
+                                        <input type="text" id="telephone_number" value="<%if(telephone_number!=null)out.print(telephone_number); %>" name="telephone_number" class="form-control" />
                                     </div>
                                     
                                     

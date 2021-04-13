@@ -54,6 +54,8 @@ public class AdminAddUserController extends HttpServlet {
 		String password = request.getParameter("password");
 		String fullname = request.getParameter("fullname");
 		String email = request.getParameter("email");
+		String address = request.getParameter("address");
+		String telephone_number = request.getParameter("telephone_number");
 		// validate dữ liệu
 		if (userDAO.hasUser(username)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/add.jsp?err=1");
@@ -75,9 +77,17 @@ public class AdminAddUserController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/add.jsp?err=5");
 			rd.forward(request, response);
 		}
+		if (address.equals("")) {
+			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/add.jsp?err=5");
+			rd.forward(request, response);
+		}
+		if (telephone_number.equals("")) {
+			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/add.jsp?err=5");
+			rd.forward(request, response);
+		}
 		// mã hóa MD5
 		password = StringUtil.md5(password);// sau khi mã hóa sẽ thành chuỗi kí tự
-		User user = new User(username, password, fullname,email);
+		User user = new User(username, password, fullname, email, address, telephone_number);
 		int add = userDAO.add(user);
 		if (add > 0) {
 			// them thanh cong

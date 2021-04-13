@@ -16,6 +16,7 @@
         		int countCat=Integer.parseInt(String.valueOf(request.getAttribute("countCat")));
         		int countSong=Integer.parseInt(String.valueOf(request.getAttribute("countSong")));
         		int countUser=Integer.parseInt(String.valueOf(request.getAttribute("countUser")));
+        		int countCart=Integer.parseInt(String.valueOf(request.getAttribute("countCart")));
         		int countContact=Integer.parseInt(String.valueOf(request.getAttribute("countContact")));
         		int countComment=Integer.parseInt(String.valueOf(request.getAttribute("countComment")));
         	%>
@@ -69,8 +70,8 @@
                     <i class="fa fa-shopping-cart"></i>
                 </span>
                     <div class="text-box">
-                        <p class="main-text"><a href="<%=request.getContextPath()%>/admin/contact" title="">Quản lý giỏ hàng</a></p>
-                        <p class="text-muted">Có <%=countContact %> Sản phẩm đã mua</p>
+                        <p class="main-text"><a href="<%=request.getContextPath()%>/admin/order/index" title="">Quản lý giỏ hàng</a></p>
+                        <p class="text-muted">Có <%=countCart%> Sản phẩm đã mua</p>
                     </div>
                 </div>
             </div>

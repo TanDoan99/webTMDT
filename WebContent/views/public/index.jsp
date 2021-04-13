@@ -5,6 +5,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="/templates/public/assets/inc/header.jsp" %>
+	<%if(request.getParameter("msg")!=null){
+	 msg = request.getParameter("msg");%>
+<input type="hidden" id="msg" value="<%=msg%>">
+<%} %>
+<%
+							if("1".equals(msg)) {
+							%>
+							<div class="alert alert-success" role="alert">
+	 							 Đã order thành công!
+							</div>
+							<%
+								}
+							%>
 <style>
 	/* thiết lập style cho thẻ a */
  .pagination a {
@@ -150,9 +163,9 @@ New Products
 				<%
                                         		if(!"".equals(objJewelry.getPicture())){
                                         	%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=objJewelry.getPicture() %>" alt="<%=objJewelry.getPicture() %>"/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=objJewelry.getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=objJewelry.getPicture() %>" alt="<%=objJewelry.getPicture() %>"/></a>
                                         	<%}else{%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=objJewelry.getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/></a>
                                       		<%} %>
 				</a>
 				<div class="caption cntr">
@@ -279,10 +292,12 @@ New Products
 	</div>
 	</div>
 	<div style="display: none;" id="result" ></div>
+
 <!--
 Footer
 -->
 <script>
+
 	function addToCart(id){
 		//alert("đã goi hàm");
 		$.ajax({
@@ -304,5 +319,7 @@ Footer
 		});
 		return false;
 	}
+	
+		
 </script>
 <%@include file="/templates/public/assets/inc/footer.jsp" %>

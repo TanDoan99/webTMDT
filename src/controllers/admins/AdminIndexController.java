@@ -24,7 +24,7 @@ public class AdminIndexController extends HttpServlet {
 		request.setAttribute("countSong", new JewelryDAO().countJewelry());
 		request.setAttribute("countUser", new JewelryDAO().countUser());
 		request.setAttribute("countContact", new JewelryDAO().countContact());
-		//request.setAttribute("countUser", new JewelryDAO().countUser());
+		request.setAttribute("countCart", new JewelryDAO().countcart());
 		request.setAttribute("countComment", new JewelryDAO().countComment());
 		request.getRequestDispatcher("/views/admin/index.jsp").forward(request, response);
 	}

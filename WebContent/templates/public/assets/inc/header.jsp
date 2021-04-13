@@ -55,7 +55,7 @@
 				 
 				<a href="<%=request.getContextPath() %>/register_index"><span class="icon-edit"></span> Free Register </a> 
 				<a href="<%=request.getContextPath() %>/contact"><span class="icon-envelope"></span> Contact us</a>
-				<a href="<%=request.getContextPath() %>/cart"><span class="icon-shopping-cart"></span><span id="sizeCart"> <%if(listCart!=null) out.print(listCart.size());else out.print(0); %> </span> Item(s) - <span class="badge badge-warning"> $448.42</span></a>
+				<a href="<%=request.getContextPath() %>/cart"><span class="icon-shopping-cart"></span><span id="sizeCart"> <%if(listCart!=null) out.print(listCart.size());else out.print(0); %> </span> Item(s) - <span class="badge badge-warning"> $Price</span></a>
 				<a href="#"><span class="icon-user"></span> 
 				<%
             	User user=(User)session.getAttribute("userInfo");

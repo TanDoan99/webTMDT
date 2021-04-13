@@ -325,6 +325,14 @@
 		<servlet-name>AdminDelCommentController</servlet-name>
 		<url-pattern>/admin/comment/del</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>AdminIndexOrderController</servlet-name>
+		<servlet-class>controllers.admins.order.AdminIndexOrderController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminIndexOrderController</servlet-name>
+		<url-pattern>/admin/order/index</url-pattern>
+	</servlet-mapping>
   <!-- login/logout -->
   <servlet>
 		<servlet-name>LoginController</servlet-name>
@@ -361,5 +369,8 @@
 		<servlet-name>LogoutPublicController</servlet-name>
 		<url-pattern>/auth/logout_index</url-pattern>
 	</servlet-mapping>
+	
+	
+	
 	
 </web-app>

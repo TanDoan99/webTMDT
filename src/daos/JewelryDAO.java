@@ -7,7 +7,6 @@ import java.util.List;
 
 import models.Category;
 import models.Comment;
-import models.Contact;
 import models.Jewelry;
 import utils.DBConnectionUtil;
 import utils.DefineUtil;
@@ -16,7 +15,7 @@ import utils.DefineUtilPublic;
 import utils.DefineUtilPublicPro;
 
 public class JewelryDAO extends AbstractDAO {
-
+	Category category;
 	public List<Jewelry> findAllJewelry() {
 		List<Jewelry> listJewelry = new ArrayList<>();
 		con = DBConnectionUtil.getConnection();
@@ -280,7 +279,23 @@ public class JewelryDAO extends AbstractDAO {
 		}
 		return count;
 	}
-
+	public Object countcart() {
+		int count = 0;
+		con = DBConnectionUtil.getConnection();
+		String sql = "SELECT COUNT(id) FROM orders";
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return count;
+	}
 	public Object countComment() {
 		int count = 0;
 		con = DBConnectionUtil.getConnection();
@@ -650,5 +665,43 @@ public class JewelryDAO extends AbstractDAO {
 		}
 		return listItems;
 	}
+	public Jewelry getItem(int id) {
+		Jewelry product = new Jewelry();
+		con = DBConnectionUtil.getConnection();
+		String sql = "p.id AS pid, id_category, sizes, p.name AS pName,picture,price,sale,title,highlight,new_product,detail,created_at,updated_at "
+				+ " c.id, c.name FROM products AS p INNER JOIN categories AS c ON p.id_category = c.id WHERE p.id = ? ";
+				
+				
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				int idOd = rs.getInt("id");
+				String sizes = rs.getString("sizes");
+				String name = rs.getString("name");
+				String picture = rs.getString("picture");
+				Double price=rs.getDouble("price");
+				int sale=rs.getInt("sale");
+				String title = rs.getString("title");
+				int highlight=rs.getInt("highlight");
+				int new_product=rs.getInt("new_product");
+				String detail=rs.getString("detail");
+				Timestamp created_at = rs.getTimestamp("created_at");
+				Timestamp updated_at = rs.getTimestamp("updated_at");
+				category = new Category(rs.getInt("c.id"), rs.getString("c.name"));
+				Jewelry objItems = new Jewelry(id,category, sizes, name, picture, price, sale, title, highlight, new_product, detail, created_at, updated_at);
 
+			
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return product;
+	}
+
+	
 }

@@ -94,12 +94,12 @@
                                         <th>Hình ảnh</th>
                                         <th>Giá bán</th>
                                         <th>Giảm giá</th>
-                                        <th>Tiêu đề</th>
+                                        <!-- <th>Tiêu đề</th>
                                         <th>Điểm nổi bật</th>
-                                        <th>Sản phẩm mới</th>
+                                        <th>Sản phẩm mới</th> -->
                                         <th>Chi tiết</th>
                                         <th>Ngày tạo</th>
-                                        <th>Ngày cập nhập</th>
+                                       <!--  <th>Ngày cập nhập</th> -->
                                         <th width="160px">Chức năng</th>
                                     </tr>
                                 </thead>
@@ -132,12 +132,12 @@
                                         </td>
                                         <td class="center"><%=objJewelry.getPrice() %></td>
                                         <td class="center"><%=objJewelry.getSale() %></td>
-                                        <td class="center"><%=objJewelry.getTitle() %></td>
+                                        <%-- <td class="center"><%=objJewelry.getTitle() %></td>
                                         <td class="center"><%=objJewelry.getHighlight() %></td>
-                                        <td class="center"><%=objJewelry.getNew_product() %></td>
+                                        <td class="center"><%=objJewelry.getNew_product() %></td> --%>
                                         <td class="center"><%=objJewelry.getDetail() %></td>
                                         <td class="center"><%=objJewelry.getCreated_at() %></td>
-                                        <td class="center"><%=objJewelry.getUpdated_at() %></td>
+                                        <%-- <td class="center"><%=objJewelry.getUpdated_at() %></td> --%>
                                         <td class="center">
                                             <a href="<%=urlEdit %>" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
                                             <a href="<%=urlDel %>" onclick="return confirm('Bạn có chắc chắn muốn xóa bài hát không?')" title="" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>

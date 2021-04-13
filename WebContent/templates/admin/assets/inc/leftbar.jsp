@@ -25,7 +25,7 @@
                 <a id="contact" href="<%=request.getContextPath() %>/admin/contact"><i class="fa fa-envelope fa-3x"></i> Quản lý liên hệ</a>
             </li>
             <li>
-                <a id="comment" href="<%=request.getContextPath() %>/admin/cart"><i class="fa fa-shopping-cart fa-3x"></i> Quản lý giỏ hàng</a>
+                <a id="cart" href="<%=request.getContextPath() %>/admin/order/index"><i class="fa fa-shopping-cart fa-3x"></i> Quản lý giỏ hàng</a>
             </li>
             <li>
                 <a id="comment" href="<%=request.getContextPath() %>/admin/comment"><i class="fa fa-comment fa-3x"></i> Quản lý bình luận</a>

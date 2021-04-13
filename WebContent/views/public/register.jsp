@@ -33,10 +33,24 @@ Body Section
 		<div class="controls">
 		  <input type="text" name="email" placeholder="Email">
 		</div>
-	  </div>	  
+	  </div>	 
+	  <div class="control-group"> 
 		<label class="control-label">Password <sup>*</sup></label>
 		<div class="controls">
 		  <input type="password" name="password" placeholder="Password">
+		</div>
+		</div>
+	 	 <div class="control-group">  
+		<label class="control-label">Address <sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" name="address" placeholder="address">
+		</div>
+		</div>
+	     <div class="control-group">
+		<label class="control-label">Telephone <sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" name="telephone_number" placeholder="telephone">
+		</div>
 		</div><br/>
 	<div class="control-group">
 		<div class="controls">

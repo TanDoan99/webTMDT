@@ -15,6 +15,7 @@ public class Cart {
 	private int number;
 	private int id_user;
 	private Timestamp date;
+	private Order order;
 	public Cart(int id) {
 		super();
 		this.id = id;
@@ -29,6 +30,17 @@ public class Cart {
 		super();
 		this.id = id;
 		this.product = product;
+	}
+	public Cart(Jewelry product, int number, Order order) {
+		super();
+		this.product = product;
+		this.number = number;
+		this.order = order;
+	}
+	public Cart(Jewelry product, int number) {
+		super();
+		this.product = product;
+		this.number = number;
 	}
 	
 	

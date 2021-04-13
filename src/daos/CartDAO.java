@@ -20,7 +20,7 @@ public class CartDAO extends AbstractDAO {
 			while (rs.next()) {
 				Cart cart = new Cart(rs.getInt("id"), new Jewelry(rs.getInt("id"), rs.getString("name"),
 						rs.getString("picture"), rs.getInt("price")),
-						rs.getInt("number"), rs.getInt("id_user"), rs.getTimestamp("date_buy"));
+						rs.getInt("number"));
 				listCart.add(cart);
 			}
 			;

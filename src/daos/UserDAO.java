@@ -19,7 +19,7 @@ public class UserDAO extends AbstractDAO {
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
 				User user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("fullname"), rs.getString("email"));
+						rs.getString("fullname"), rs.getString("email"), rs.getString("address"), rs.getString("telephone_number"));
 				list.add(user);
 			}
 		} catch (SQLException e) {
@@ -35,13 +35,15 @@ public class UserDAO extends AbstractDAO {
 	public int add(User user) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "INSERT INTO users (username,password,fullname,email) VALUE (?,?,?,?)";
+		String sql = "INSERT INTO users (username,password,fullname,email,address,telephone_number) VALUE (?,?,?,?,?,?)";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, user.getUsername());
 			pst.setString(2, user.getPassword());
 			pst.setString(3, user.getFullname());
 			pst.setString(4, user.getEmail());
+			pst.setString(5, user.getAddress());
+			pst.setString(6, user.getTelephone_number());
 			result = pst.executeUpdate();
 
 		} catch (SQLException e) {
@@ -75,7 +77,7 @@ public class UserDAO extends AbstractDAO {
 	public User getItem(int id) {
 		User item = null;
 		con = DBConnectionUtil.getConnection();
-		String sql = "SELECT id, username, password, fullname, email FROM users WHERE id = ?";
+		String sql = "SELECT id, username, password, fullname, email, address, telephone_number FROM users WHERE id = ?";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, id);
@@ -85,7 +87,9 @@ public class UserDAO extends AbstractDAO {
 				String password = rs.getString("password");
 				String fullname = rs.getString("fullname");
 				String email = rs.getString("email");
-				item = new User(username, password, fullname,email);
+				String address = rs.getString("address");
+				String telephone_number = rs.getString("telephone_number");
+				item = new User(username, password, fullname, email, address, telephone_number);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -100,13 +104,18 @@ public class UserDAO extends AbstractDAO {
 	public int editItem(User users) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "UPDATE users SET password=?, fullname=?, email=? WHERE id = ?";
+		String sql = "UPDATE users SET password=?, fullname=?, email=?, address=?, telephone_number=?, update_by =? , create_date =? , update_date = ? WHERE id = ?";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, users.getPassword());
 			pst.setString(2, users.getFullname());
 			pst.setString(3, users.getEmail());
-			pst.setInt(4, users.getId());
+			pst.setString(4, users.getAddress());
+			pst.setString(5, users.getTelephone_number());
+			pst.setInt(6, users.getUpdateBy());
+			pst.setTimestamp(7, users.getCreateDate());
+			pst.setTimestamp(8, users.getUpdateDate());
+			pst.setInt(9, users.getId());
 
 			result = pst.executeUpdate();
 
@@ -150,7 +159,7 @@ public class UserDAO extends AbstractDAO {
 			rs = pst.executeQuery();
 			if (rs.next()) {
 				user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("fullname"),rs.getString("email"));
+						rs.getString("fullname"),rs.getString("email"), rs.getString("address"), rs.getString("telephone_number"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -171,7 +180,7 @@ public class UserDAO extends AbstractDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				User us = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("fullname"),rs.getString("email"));
+						rs.getString("fullname"),rs.getString("email"),rs.getString("address"),rs.getString("telephone_number"));
 				listItems.add(us);
 			}
 			;
@@ -182,6 +191,30 @@ public class UserDAO extends AbstractDAO {
 			DBConnectionUtil.close(rs, pst, con);
 		}
 		return listItems;
+	}
+
+	public User login(String username, String password) {
+		User user = null;
+		con=DBConnectionUtil.getConnection();
+		String sql="select id, username, fullname, address, email, telephone_number, create_date, create_by"
+				+ " FROM users  where username = ? && password = ?"; 
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, password);
+			rs= pst.executeQuery();
+			while (rs.next()) {
+				
+			user = new User(rs.getInt("id"),rs.getString("username"),rs.getString("fullname"),rs.getString("address"),rs.getString("email"),rs.getString("telephone_number"),rs.getInt("create_by"),rs.getTimestamp("create_date"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return user;
 	}
 
 

@@ -1,7 +1,10 @@
-<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="models.Comment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Jewelry"%>
+<%@page import="java.text.DateFormat"%>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="/templates/public/assets/inc/header.jsp" %>
@@ -447,6 +450,7 @@ Body Section
     	<div id="ajax-data">
 			<%
 				if (session.getAttribute("listCmt") != null) {
+					Calendar cal = Calendar.getInstance();
 						ArrayList<Comment> listCmt = (ArrayList<Comment>) session.getAttribute("listCmt");
 						if(listCmt.size()>0){
 			%>
@@ -458,7 +462,7 @@ Body Section
 			<div class="item-cmt">
 				<span><%=objCmt.getName()%></span>&nbsp;&nbsp;&nbsp;
 				<span style="color: #FE2EC8;"><%=objCmt.getCmt()%></span>&nbsp;&nbsp;&nbsp;
-				 <span style="color: green;"><%=objCmt.getDate_send()%></span> 
+				 <span style="color: green;"><%=DateFormat.getDateInstance().format(objCmt.getDate_send())%></span> 
 			</div>
 			<%
 				}

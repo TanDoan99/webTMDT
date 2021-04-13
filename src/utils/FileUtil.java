@@ -58,7 +58,7 @@ public class FileUtil {
 	public static boolean delFile(String fileName, HttpServletRequest request) {
 		if (!"".equals(fileName)) {
 			String filePath = request.getServletContext().getRealPath("") + GlobalConstant.DIR_UPLOAD +File.separator+ fileName;
-			System.out.println(filePath);
+//			System.out.println(filePath);
 			File file = new File(filePath);
 			return file.delete();
 		}

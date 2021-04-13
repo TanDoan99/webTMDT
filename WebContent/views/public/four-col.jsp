@@ -28,9 +28,9 @@ Three column view
 				<% 
 					if(!"".equals(objJewe.getPicture() )){
                                         	%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=objJewe.getPicture() %>" alt=""/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=objJewe.getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/uploads/images/<%=objJewe.getPicture() %>" alt=""/></a>
                                         	<%}else{%>
-											<img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/>
+											<a href="<%=request.getContextPath() %>/product_details?id=<%=objJewe.getId() %>"><img width="200px" height="200px" src="<%=request.getContextPath()%>/templates/admin/assets/img/no-img.jpg" alt="no img"/></a>
                                       		<%} %>
 				</a>
 				<div class="caption cntr">

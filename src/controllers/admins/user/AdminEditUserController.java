@@ -88,14 +88,24 @@ public class AdminEditUserController extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/edit.jsp?err=2");
 				rd.forward(request, response);
 			}
-			String email = request.getParameter("emailname");
+			String email = request.getParameter("email");
 			if (email.equals("")) {
+				RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/edit.jsp?err=3");
+				rd.forward(request, response);
+			}
+			String address = request.getParameter("address");
+			if (address.equals("")) {
+				RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/edit.jsp?err=3");
+				rd.forward(request, response);
+			}
+			String telephone_number = request.getParameter("telephone_number");
+			if (telephone_number.equals("")) {
 				RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/edit.jsp?err=3");
 				rd.forward(request, response);
 			}
 			// du lieu moi
 
-			User users = new User(id, password, fullname,email);
+			User users = new User(id, password, fullname, email, address, telephone_number);
 			int edit = userDAO.editItem(users);
 			if (edit > 0) {
 				// thanh cong

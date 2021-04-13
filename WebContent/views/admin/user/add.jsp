@@ -15,6 +15,8 @@
       	  	String username=request.getParameter("username");
       	  	String fullname=request.getParameter("fullname");
       	  	String email=request.getParameter("email");
+      	  	String address=request.getParameter("address");
+      	  	String telephone_number=request.getParameter("telephone_number");
            	if("0".equals(err)) {
           %>
 			<div class="alert alert-danger" role="alert">
@@ -92,6 +94,14 @@
                                     <div class="form-group">
                                         <label for="Email">Email</label>
                                         <input type="text" id="email" value="<%if(email!=null)out.print(email); %>" name="email" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Email">Address</label>
+                                        <input type="text" id="email" value="<%if(address!=null)out.print(address); %>" name="email" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Email">	Telephone_number</label>
+                                        <input type="text" id="email" value="<%if(telephone_number!=null)out.print(telephone_number); %>" name="email" class="form-control" />
                                     </div>
                                     
                                     
