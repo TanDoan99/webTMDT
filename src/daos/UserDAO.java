@@ -127,6 +127,29 @@ public class UserDAO extends AbstractDAO {
 
 		return result;
 	}
+	public void editItems(User user) {
+		int result = 0;
+		con=DBConnectionUtil.getConnection();
+		String sql=" UPDATE users SET fullname = ?, address =?, telephone_number =?, update_by =? , create_date =? , update_date = ? WHERE id = ?";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, user.getFullname());
+			pst.setString(2, user.getAddress());
+			pst.setString(3, user.getTelephone_number());
+			pst.setInt(4, user.getId());
+			pst.setTimestamp(5, user.getCreateDate());
+			pst.setTimestamp(6, user.getUpdateDate());
+			pst.setInt(7, user.getId());
+			result = pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBConnectionUtil.close(rs, st, con);
+		}
+		
+	}
 
 	public int delItem(int id) {
 		int result = 0;

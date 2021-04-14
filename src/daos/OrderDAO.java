@@ -1,7 +1,6 @@
 package daos;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,25 +122,19 @@ public class OrderDAO extends AbstractDAO {
 	public List<Order> getByCategoryPagination(int offset, int perPage) {
 		List<Order> list = new ArrayList<>();
 		con = DBConnectionUtil.getConnection();
-		String sql = "SELECT o.id,o.total_money,o.payment_method,o.discount,o.create_date,o.create_by from orders AS o  ORDER BY o.id DESC LIMIT ?, ?";
+		String sql = "SELECT id,total_money,payment_method,discount,create_date,create_by from orders AS o  ORDER BY id DESC LIMIT ?, ?";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, offset);
 			pst.setInt(2, perPage);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				int id = rs.getInt("o.id");
-				int totalMoney = rs.getInt("o.total_money");
-				String paymentMethod = rs.getString("o.payment_method");
-				int discount = rs.getInt("o.discount");
-				Timestamp createDate = rs.getTimestamp("create_date");
-				int createBy = rs.getInt("o.create_by");
 				
-				Order order = new Order(rs.getInt("o.id"),
-						rs.getInt("o.total_money"),
-						rs.getString("o.payment_method"),
-						rs.getFloat("o.discount"),
-						rs.getInt("o.create_by"),
+				Order order = new Order(rs.getInt("id"),
+						rs.getInt("total_money"),
+						rs.getString("payment_method"),
+						rs.getFloat("discount"),
+						rs.getInt("create_by"),
 						rs.getTimestamp("create_date"));
 
 				list.add(order);

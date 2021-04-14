@@ -41,7 +41,7 @@ public class AdminEditJewelryController extends HttpServlet {
 			return;
 		}
 		JewelryDAO jewelryDAO = new JewelryDAO();
-		Jewelry jewelry = jewelryDAO.findSong(id);
+		Jewelry jewelry = jewelryDAO.findJew(id);
 		CatDAO catDAO = new CatDAO();
 		List<Category> listCat = catDAO.findAll();
 		request.setAttribute("jewelry", jewelry);
@@ -73,7 +73,7 @@ public class AdminEditJewelryController extends HttpServlet {
 		// upload anh
 		// System.out.println(fileName);
 		JewelryDAO jewelryDAO = new JewelryDAO();
-		Jewelry itemJewelry = jewelryDAO.findSong(id);
+		Jewelry itemJewelry = jewelryDAO.findJew(id);
 		if ("".equals(fileName)) {
 			fileName = itemJewelry.getPicture();
 		}

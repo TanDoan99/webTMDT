@@ -16,9 +16,9 @@
                 <h2 >your order</h2>
                 <form>
                 	<%if(session.getAttribute("listCart")!=null){ 
-                		List<Cart> cartList = (List<Cart>)session.getAttribute("listCart");
-                		if(cartList.size()>0){
-                		for(Cart od : cartList){%>
+                		ArrayList<Cart> listCart = (ArrayList)session.getAttribute("listCart");
+                		if(listCart.size()>0){
+                		for(Cart od : listCart){%>
                     <div class="control-group">
                         <div class="col-xs-12 ">
                             <a href="#" class="qty"><%=od.getNumber()%> x</a>

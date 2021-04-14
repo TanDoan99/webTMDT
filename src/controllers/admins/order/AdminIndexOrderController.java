@@ -39,7 +39,7 @@ public class AdminIndexOrderController extends HttpServlet {
 		}
 		
 		OrderDAO  orderDAO = new OrderDAO();
-		List<Order> orderList = new ArrayList();
+		List<Order> orderList = new ArrayList<Order>();
 		orderList=	orderDAO.findAll();
 		int numberOfItems = 0;
 		int numberOfPages = 0;

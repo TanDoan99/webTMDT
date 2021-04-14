@@ -11,7 +11,7 @@ Body Section
 		<li class="active">Check Out</li>
     </ul>
 	<div class="well well-small">
-		<h1>Check Out <small class="pull-right"> <span id="sizeCart"><%if(listCart!=null) out.print(listCart.size());else out.print(0); %> </span> Items are in the cart </small></h1>
+		<h1>Check Out <small class="pull-right"> <span id="sizeCart"><%if(cartList!=null) out.print(cartList.size());else out.print(0); %> </span> Items are in the cart </small></h1>
 	<hr class="soften"/>	
 	<table class="table table-bordered table-condensed" id="table">
               <thead>

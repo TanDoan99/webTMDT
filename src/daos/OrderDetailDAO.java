@@ -32,7 +32,7 @@ public class OrderDetailDAO extends AbstractDAO {
 
 
 	public List<Cart> findByOrderId(int orderId) {
-		List<Cart> list=new ArrayList<>();
+		List<Cart> list=new ArrayList<Cart>();
 		con=DBConnectionUtil.getConnection();
 		String sql="select * from order_details where order_id = ? ";
 		try {

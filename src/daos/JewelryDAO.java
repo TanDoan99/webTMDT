@@ -402,7 +402,7 @@ public class JewelryDAO extends AbstractDAO {
 		return result;
 	}
 
-	public Jewelry findSong(int id) {
+	public Jewelry findJew(int id) {
 		Jewelry jewelry = null;
 		con = DBConnectionUtil.getConnection();
 		String sql = "SELECT p.*,c.name AS catName FROM products AS p " + "INNER JOIN categories AS c "
@@ -668,8 +668,8 @@ public class JewelryDAO extends AbstractDAO {
 	public Jewelry getItem(int id) {
 		Jewelry product = new Jewelry();
 		con = DBConnectionUtil.getConnection();
-		String sql = "p.id AS pid, id_category, sizes, p.name AS pName,picture,price,sale,title,highlight,new_product,detail,created_at,updated_at "
-				+ " c.id, c.name FROM products AS p INNER JOIN categories AS c ON p.id_category = c.id WHERE p.id = ? ";
+		String sql = "select p.id, p.sizes, p.name,p.picture,p.price,p.sale,p.title,p.highlight,p.new_product,p.detail,p.created_at,p.updated_at,"
+				+ "c.id, c.name FROM products AS p INNER JOIN categories AS c ON p.id_category = c.id WHERE p.id = ? ";
 				
 				
 		try {
@@ -677,20 +677,20 @@ public class JewelryDAO extends AbstractDAO {
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				int idOd = rs.getInt("id");
-				String sizes = rs.getString("sizes");
-				String name = rs.getString("name");
-				String picture = rs.getString("picture");
-				Double price=rs.getDouble("price");
-				int sale=rs.getInt("sale");
-				String title = rs.getString("title");
-				int highlight=rs.getInt("highlight");
-				int new_product=rs.getInt("new_product");
-				String detail=rs.getString("detail");
-				Timestamp created_at = rs.getTimestamp("created_at");
-				Timestamp updated_at = rs.getTimestamp("updated_at");
+				int idOd = rs.getInt("p.id");
+				String sizes = rs.getString("p.sizes");
+				String name = rs.getString("p.name");
+				String picture = rs.getString("p.picture");
+				Double price=rs.getDouble("p.price");
+				int sale=rs.getInt("p.sale");
+				String title = rs.getString("p.title");
+				int highlight=rs.getInt("p.highlight");
+				int new_product=rs.getInt("p.new_product");
+				String detail=rs.getString("p.detail");
+				Timestamp created_at = rs.getTimestamp("p.created_at");
+				Timestamp updated_at = rs.getTimestamp("p.updated_at");
 				category = new Category(rs.getInt("c.id"), rs.getString("c.name"));
-				Jewelry objItems = new Jewelry(id,category, sizes, name, picture, price, sale, title, highlight, new_product, detail, created_at, updated_at);
+				product = new Jewelry(idOd,category, sizes, name, picture, price, sale, title, highlight, new_product, detail, created_at, updated_at);
 
 			
 

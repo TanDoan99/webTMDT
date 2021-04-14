@@ -105,7 +105,7 @@ public class PublicCheckOutController extends HttpServlet {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		user.setUpdateDate(timestamp);
 		UserDAO userDAO = new UserDAO();
-		userDAO.editItem(user);
+		userDAO.editItems(user);
 
 		// add don hang
 		Order order = new Order();

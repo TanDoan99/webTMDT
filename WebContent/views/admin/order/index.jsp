@@ -16,7 +16,7 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-md-12">
-                <h2>Quản lý đơn h</h2>
+                <h2>Quản lý đơn hàng</h2>
             </div>
         </div>
         <!-- /. ROW  -->
@@ -40,7 +40,7 @@
                     <th>Phương thức thanh toán</th> 
                     <th>Giảm giá</th> 
                     <th>Ngày tạo</th> 
-                    <th>ID Người tạo</th>
+                   <!--  <th>ID Người tạo</th> -->
                     <th>Chi tiet</th>            
                   </tr>
                   </thead>
@@ -61,7 +61,7 @@
                       <td><%=pro.getPaymentMethod() %></td>
                       <td><%=pro.getDiscount()*100%>%</td>
                      <td><%=pro.getCreateDate()%></td>
-                     <td><%=pro.getCreateBy() %></td>
+                    <!--   <td><%=pro.getCreateBy() %></td>-->
                      <td>
                      <button type="button"  class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-default<%=pro.getId()%>">Xem</button>
                      <!-- The Modal -->

@@ -30,7 +30,7 @@
 						 </div><!-- /.accordion-group -->		
 		<% }}} %>
 	<br/>
-	<a class="totalInCart" href="cart.html"><strong>Total Amount  <span class="badge badge-warning pull-right" style="line-height:18px;">$448.42</span></strong></a>
+	<a class="totalInCart" href="cart.html"><strong>Total Amount  <span class="badge badge-warning pull-right" style="line-height:18px;">$Price_Money</span></strong></a>
 </div>
 </div>
 </div>

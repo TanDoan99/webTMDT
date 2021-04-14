@@ -96,8 +96,8 @@
                                         <th>Giảm giá</th>
                                         <!-- <th>Tiêu đề</th>
                                         <th>Điểm nổi bật</th>
-                                        <th>Sản phẩm mới</th> -->
-                                        <th>Chi tiết</th>
+                                        <th>Sản phẩm mới</th>
+                                        <th>Chi tiết</th> -->
                                         <th>Ngày tạo</th>
                                        <!--  <th>Ngày cập nhập</th> -->
                                         <th width="160px">Chức năng</th>
@@ -131,11 +131,11 @@
                                       		<%} %>
                                         </td>
                                         <td class="center"><%=objJewelry.getPrice() %></td>
-                                        <td class="center"><%=objJewelry.getSale() %></td>
+                                        <td class="center"><%=objJewelry.getSale() %>(%)</td>
                                         <%-- <td class="center"><%=objJewelry.getTitle() %></td>
                                         <td class="center"><%=objJewelry.getHighlight() %></td>
-                                        <td class="center"><%=objJewelry.getNew_product() %></td> --%>
-                                        <td class="center"><%=objJewelry.getDetail() %></td>
+                                        <td class="center"><%=objJewelry.getNew_product() %></td> 
+                                        <td class="center"><%=objJewelry.getDetail() %></td>--%>
                                         <td class="center"><%=objJewelry.getCreated_at() %></td>
                                         <%-- <td class="center"><%=objJewelry.getUpdated_at() %></td> --%>
                                         <td class="center">
